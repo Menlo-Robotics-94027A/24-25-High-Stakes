@@ -1,4 +1,4 @@
-# [TEAM NAME]
+# Curious G-Force
 Menlo Robotics Team A (94027A)
 
 Vex V5RC High Stakes (2024-2025)

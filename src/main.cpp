@@ -1,15 +1,11 @@
 #include "main.h"
 #include "lemlib/api.hpp"
-#include "lemlib/chassis/chassis.hpp"
 #include "lemlib/chassis/trackingWheel.hpp"
-#include "pros/llemu.hpp"
 #include "pros/misc.h"
-#include "pros/motor_group.hpp"
+#include "pros/rotation.hpp"
 
 // TODO: Software-Side
-// 1. Configure Motor & Device Ports
-// 2. Take robot measurements to configure drivetrain wheels & track width
-// 3. Perform PID Tuning
+// 1. Perform PID Tuning
 
 // TODO: Hardware-Side
 // 1. Add vertical/horizontal tracking wheels (would make my life a lot easier)
@@ -17,14 +13,18 @@
 // Smart Port Devices
 pros::MotorGroup
     left_motors({1, 2, 3},
-                pros::MotorGearset::green); // TODO: Update ports (and direction
-                                            // by adding a - sign)
+                pros::MotorGearset::green);
 pros::MotorGroup
     right_motors({-4, -5, -6},
-                 pros::MotorGearset::green); // TODO: Update ports (and
-                                             // direction by adding a - sign)
+                 pros::MotorGearset::green);
 
-pros::Imu inertial_sensor(7); // TODO: Update port
+
+pros::Rotation horizontal_rotation_sensor(9);
+pros::Rotation vertical_rotation_sensor(10);
+pros::Imu inertial_sensor(7);
+
+// 3-Wire Devices
+pros::adi::DigitalOut grabber_piston ('a', LOW);
 
 // Wireless Devices
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
@@ -33,9 +33,8 @@ pros::Controller partner_controller(pros::E_CONTROLLER_PARTNER);
 // Drivetrain Configuration
 lemlib::Drivetrain
     drivetrain(&left_motors, &right_motors,
-               10, // Track width (in inches) TODO: Measure actual trackwidth
-               lemlib::Omniwheel::NEW_275, // Wheel type TODO: Replace with
-                                           // actual wheel type
+               11.75,
+               lemlib::Omniwheel::NEW_275,
                360, // Drivetrain Speed (RPM) TODO: Tune this value
                2    // Horizontal Drift TODO: Tune this value
     );
@@ -66,9 +65,13 @@ lemlib::ControllerSettings
     );
 
 // Odometry Configuration
-lemlib::OdomSensors odometry_sensors(nullptr, // Vertical Tracking Wheel 1
+lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_rotation_sensor, lemlib::Omniwheel::OLD_275, -2);
+lemlib::TrackingWheel vertical_tracking_wheel(&vertical_rotation_sensor, lemlib::Omniwheel::OLD_275, -0.75);
+
+
+lemlib::OdomSensors odometry_sensors(&vertical_tracking_wheel, // Vertical Tracking Wheel 1
                                      nullptr, // Vertical Tracking Wheel 2
-                                     nullptr, // Horizontal Tracking Wheel 1
+                                     &horizontal_tracking_wheel, // Horizontal Tracking Wheel 1
                                      nullptr, // Horizontal Tracking Wheel 2
                                      &inertial_sensor // Inertial Sensor
 );
@@ -100,7 +103,6 @@ void initialize() {
 		// Sleep for 20ms (give screen enough time to update)
 		pros::delay(20);
 	});
-
 }
 
 
@@ -116,6 +118,14 @@ void opcontrol() {
 
 		// Move the robot (with steering priority)
 		chassis.arcade(leftY, rightX, false, 0.75); // High value = prioritize steering, low value = prioritize speed
+
+        // Pneumatics
+        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+            grabber_piston.set_value(HIGH);
+        }
+        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+            grabber_piston.set_value(LOW);
+        }
 
 		// Sleep for 20ms (save resources, no need to update faster)
 		pros::delay(20);
