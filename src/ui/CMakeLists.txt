@@ -1,0 +1,7 @@
+SET(SOURCES screens/ui_Autonomous_Mode_Select.c
+    ui.c
+    components/ui_comp_hook.c
+    ui_helpers.c
+    images/ui_img_field_png.c)
+
+add_library(ui ${SOURCES})
