@@ -1,0 +1,1 @@
+int auton_selected = 0;

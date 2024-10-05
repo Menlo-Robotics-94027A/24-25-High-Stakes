@@ -10,72 +10,37 @@ void ui_Autonomous_Mode_Select_screen_init(void)
 ui_Autonomous_Mode_Select = lv_obj_create(NULL);
 lv_obj_clear_flag( ui_Autonomous_Mode_Select, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
-ui_Field_Image = lv_img_create(ui_Autonomous_Mode_Select);
-lv_img_set_src(ui_Field_Image, ui_img_field_png);
-lv_obj_set_width( ui_Field_Image, LV_SIZE_CONTENT);  /// 2000
-lv_obj_set_height( ui_Field_Image, LV_SIZE_CONTENT);   /// 2000
-lv_obj_set_align( ui_Field_Image, LV_ALIGN_CENTER );
-lv_obj_add_flag( ui_Field_Image, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
-lv_obj_clear_flag( ui_Field_Image, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
-lv_img_set_zoom(ui_Field_Image,30);
+ui_Left_Button = lv_btn_create(ui_Autonomous_Mode_Select);
+lv_obj_set_width( ui_Left_Button, 100);
+lv_obj_set_height( ui_Left_Button, 50);
+lv_obj_set_x( ui_Left_Button, 8 );
+lv_obj_set_y( ui_Left_Button, 0 );
+lv_obj_set_align( ui_Left_Button, LV_ALIGN_LEFT_MID );
+lv_obj_set_style_bg_color(ui_Left_Button, lv_color_hex(0x1A79C3), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Left_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Blue_1 = lv_btn_create(ui_Autonomous_Mode_Select);
-lv_obj_set_width( ui_Blue_1, 100);
-lv_obj_set_height( ui_Blue_1, 50);
-lv_obj_set_x( ui_Blue_1, 8 );
-lv_obj_set_y( ui_Blue_1, 8 );
-lv_obj_set_style_bg_color(ui_Blue_1, lv_color_hex(0x1A79C3), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Blue_1, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Left = lv_label_create(ui_Left_Button);
+lv_obj_set_width( ui_Left, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Left, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Left, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Left,"Left");
 
-ui_Blue_1_Label = lv_label_create(ui_Blue_1);
-lv_obj_set_width( ui_Blue_1_Label, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Blue_1_Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_Blue_1_Label, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Blue_1_Label,"Blue 1");
+ui_Right_Button = lv_btn_create(ui_Autonomous_Mode_Select);
+lv_obj_set_width( ui_Right_Button, 100);
+lv_obj_set_height( ui_Right_Button, 50);
+lv_obj_set_x( ui_Right_Button, -8 );
+lv_obj_set_y( ui_Right_Button, 0 );
+lv_obj_set_align( ui_Right_Button, LV_ALIGN_RIGHT_MID );
+lv_obj_set_style_bg_color(ui_Right_Button, lv_color_hex(0x1A79C3), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Right_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_Red_1 = lv_btn_create(ui_Autonomous_Mode_Select);
-lv_obj_set_width( ui_Red_1, 100);
-lv_obj_set_height( ui_Red_1, 50);
-lv_obj_set_x( ui_Red_1, -8 );
-lv_obj_set_y( ui_Red_1, 8 );
-lv_obj_set_align( ui_Red_1, LV_ALIGN_TOP_RIGHT );
-lv_obj_set_style_bg_color(ui_Red_1, lv_color_hex(0xD72730), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Red_1, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_Right = lv_label_create(ui_Right_Button);
+lv_obj_set_width( ui_Right, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Right, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Right, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Right,"Right");
 
-ui_Red_1_Label = lv_label_create(ui_Red_1);
-lv_obj_set_width( ui_Red_1_Label, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Red_1_Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_Red_1_Label, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Red_1_Label,"Red 1");
-
-ui_Blue_2 = lv_btn_create(ui_Autonomous_Mode_Select);
-lv_obj_set_width( ui_Blue_2, 100);
-lv_obj_set_height( ui_Blue_2, 50);
-lv_obj_set_x( ui_Blue_2, 8 );
-lv_obj_set_y( ui_Blue_2, -8 );
-lv_obj_set_align( ui_Blue_2, LV_ALIGN_BOTTOM_LEFT );
-lv_obj_set_style_bg_color(ui_Blue_2, lv_color_hex(0x1A79C3), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Blue_2, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-ui_Blue_2_Label = lv_label_create(ui_Blue_2);
-lv_obj_set_width( ui_Blue_2_Label, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Blue_2_Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_Blue_2_Label, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Blue_2_Label,"Blue 2");
-
-ui_Red_2 = lv_btn_create(ui_Autonomous_Mode_Select);
-lv_obj_set_width( ui_Red_2, 100);
-lv_obj_set_height( ui_Red_2, 50);
-lv_obj_set_x( ui_Red_2, -8 );
-lv_obj_set_y( ui_Red_2, -8 );
-lv_obj_set_align( ui_Red_2, LV_ALIGN_BOTTOM_RIGHT );
-lv_obj_set_style_bg_color(ui_Red_2, lv_color_hex(0xD72730), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_Red_2, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-
-ui_Red_2_Label = lv_label_create(ui_Red_2);
-lv_obj_set_width( ui_Red_2_Label, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_Red_2_Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_align( ui_Red_2_Label, LV_ALIGN_CENTER );
-lv_label_set_text(ui_Red_2_Label,"Red 2");
+lv_obj_add_event_cb(ui_Left_Button, ui_event_Left_Button, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Right_Button, ui_event_Right_Button, LV_EVENT_ALL, NULL);
 
 }

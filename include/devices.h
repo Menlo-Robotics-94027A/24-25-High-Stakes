@@ -9,7 +9,8 @@ extern pros::Imu inertial_sensor;
 extern pros::Rotation horizontal_rotation_sensor;
 extern pros::Rotation vertical_rotation_sensor;
 
-extern pros::MotorGroup intake_motors;
+extern pros::MotorGroup intake_rollers;
+extern pros::MotorGroup intake_belt;
 
 // 3-Wire Devices
 extern pros::adi::DigitalOut grabber_piston;

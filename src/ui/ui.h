@@ -18,18 +18,28 @@ extern "C" {
 // SCREEN: ui_Autonomous_Mode_Select
 void ui_Autonomous_Mode_Select_screen_init(void);
 extern lv_obj_t *ui_Autonomous_Mode_Select;
-extern lv_obj_t *ui_Field_Image;
-extern lv_obj_t *ui_Blue_1;
-extern lv_obj_t *ui_Blue_1_Label;
-extern lv_obj_t *ui_Red_1;
-extern lv_obj_t *ui_Red_1_Label;
-extern lv_obj_t *ui_Blue_2;
-extern lv_obj_t *ui_Blue_2_Label;
-extern lv_obj_t *ui_Red_2;
-extern lv_obj_t *ui_Red_2_Label;
+void ui_event_Left_Button( lv_event_t * e);
+extern lv_obj_t *ui_Left_Button;
+extern lv_obj_t *ui_Left;
+void ui_event_Right_Button( lv_event_t * e);
+extern lv_obj_t *ui_Right_Button;
+extern lv_obj_t *ui_Right;
+// SCREEN: ui_Selected_Left
+void ui_Selected_Left_screen_init(void);
+extern lv_obj_t *ui_Selected_Left;
+extern lv_obj_t *ui_Left1;
+void ui_event_Back_Button( lv_event_t * e);
+extern lv_obj_t *ui_Back_Button;
+extern lv_obj_t *ui_Back_Button_Label;
+// SCREEN: ui_Selected_Right
+void ui_Selected_Right_screen_init(void);
+extern lv_obj_t *ui_Selected_Right;
+extern lv_obj_t *ui_Right1;
+void ui_event_Back_Button1( lv_event_t * e);
+extern lv_obj_t *ui_Back_Button1;
+extern lv_obj_t *ui_Back_Button_Label1;
 extern lv_obj_t *ui____initial_actions0;
 
-extern const char *ui_img_field_png;   // assets/field.png
 
 
 

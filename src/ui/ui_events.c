@@ -3,8 +3,15 @@
 // LVGL version: 8.3.6
 // Project name: SquareLine_Project
 
-#include "../ui.h"
+#include "ui.h"
+#include "auton.h"
 
+void setAutonLeft(lv_event_t * e)
+{
+	auton_selected = 0;
+}
 
-// IMAGE DATA: assets/field.png
-   const char *ui_img_field_png = "S:/usd/assets/field.png";
+void setAutonRight(lv_event_t * e)
+{
+	auton_selected = 1;
+}

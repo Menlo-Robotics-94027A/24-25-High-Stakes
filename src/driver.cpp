@@ -4,10 +4,6 @@
 typedef FILE *pc_file_t;
 
 void* pcfs_open(struct _lv_fs_drv_t *drv, const char *fn, lv_fs_mode_t mode) {
-
-  // DEBUG LOG
-  printf("Opening file: %s\n", fn);
-
   errno = 0;
   const char *flags = "";
   if (mode == LV_FS_MODE_WR)
@@ -30,9 +26,6 @@ void* pcfs_open(struct _lv_fs_drv_t *drv, const char *fn, lv_fs_mode_t mode) {
 }
 
 lv_fs_res_t pcfs_close(struct _lv_fs_drv_t *drv, void *file_p) {
-  // DEBUG LOG
-  printf("Closing file\n");
-
   pc_file_t *fp = (pc_file_t *)file_p;
   fclose(*fp);
   return LV_FS_RES_OK;
@@ -40,16 +33,12 @@ lv_fs_res_t pcfs_close(struct _lv_fs_drv_t *drv, void *file_p) {
 
 lv_fs_res_t pcfs_read(struct _lv_fs_drv_t *drv, void *file_p, void *buf, uint32_t btr,
                              uint32_t *br) {
-                              // DEBUG LOG
-  printf("Reading file\n");
   pc_file_t *fp = (pc_file_t *)file_p;
   *br = fread(buf, 1, btr, *fp);
   return LV_FS_RES_OK;
 }
 
 lv_fs_res_t pcfs_seek(struct _lv_fs_drv_t *drv, void *file_p, uint32_t pos, lv_fs_whence_t whence) {
-  // DEBUG LOG
-  printf("Seeking file\n");
   pc_file_t *fp = (pc_file_t *)file_p;
   int origin;
   switch (whence) {
@@ -70,8 +59,6 @@ lv_fs_res_t pcfs_seek(struct _lv_fs_drv_t *drv, void *file_p, uint32_t pos, lv_f
 }
 
 lv_fs_res_t pcfs_tell(struct _lv_fs_drv_t *drv, void *file_p, uint32_t *pos_p) {
-  // DEBUG LOG
-  printf("Telling file\n");
   pc_file_t *fp = (pc_file_t *)file_p;
   *pos_p = ftell(*fp);
   return LV_FS_RES_OK;
