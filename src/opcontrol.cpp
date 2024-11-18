@@ -1,7 +1,7 @@
-#include "devices.h"
+#include "opcontrol.h"
+#include "pros/misc.h"
+
 void runOpcontrol() {
-    // Arcade Style Control (speed + direction)
-  // (tank, arcade, curvature)
   while (true) {
     // Get controller inputs
     int rightY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
@@ -17,6 +17,13 @@ void runOpcontrol() {
     }
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
       grabber_piston.set_value(LOW);
+    }
+
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
+      elevation_piston.set_value(HIGH);
+    }
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+      elevation_piston.set_value(LOW);
     }
 
     // Intake Rollers
@@ -41,6 +48,13 @@ void runOpcontrol() {
     } else {
       // Stop
       intake_belt.move(0);
+    }
+
+    // Arm
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+      arm.set_value(HIGH);
+    } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
+      arm.set_value(LOW);
     }
 
     // Sleep for 20ms (save resources, no need to update faster)

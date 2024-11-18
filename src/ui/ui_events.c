@@ -15,3 +15,8 @@ void setAutonRight(lv_event_t * e)
 {
 	auton_selected = 1;
 }
+
+void setAutonSkills(lv_event_t * e)
+{
+	auton_selected = 2;
+}

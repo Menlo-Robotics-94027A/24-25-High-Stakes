@@ -18,6 +18,9 @@ lv_obj_t *ui_Left;
 void ui_event_Right_Button( lv_event_t * e);
 lv_obj_t *ui_Right_Button;
 lv_obj_t *ui_Right;
+void ui_event_Skills_Button( lv_event_t * e);
+lv_obj_t *ui_Skills_Button;
+lv_obj_t *ui_Skills;
 
 
 // SCREEN: ui_Selected_Left
@@ -36,6 +39,15 @@ lv_obj_t *ui_Right1;
 void ui_event_Back_Button1( lv_event_t * e);
 lv_obj_t *ui_Back_Button1;
 lv_obj_t *ui_Back_Button_Label1;
+
+
+// SCREEN: ui_Selected_Skills
+void ui_Selected_Skills_screen_init(void);
+lv_obj_t *ui_Selected_Skills;
+lv_obj_t *ui_Skills2;
+void ui_event_Back_Button2( lv_event_t * e);
+lv_obj_t *ui_Back_Button2;
+lv_obj_t *ui_Back_Button_Label2;
 lv_obj_t *ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -63,6 +75,13 @@ if ( event_code == LV_EVENT_CLICKED) {
       _ui_screen_change( &ui_Selected_Right, LV_SCR_LOAD_ANIM_FADE_ON, 250, 0, &ui_Selected_Right_screen_init);
 }
 }
+void ui_event_Skills_Button( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      _ui_screen_change( &ui_Selected_Skills, LV_SCR_LOAD_ANIM_FADE_ON, 250, 0, &ui_Selected_Skills_screen_init);
+      setAutonSkills( e );
+}
+}
 void ui_event_Back_Button( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
@@ -70,6 +89,12 @@ if ( event_code == LV_EVENT_CLICKED) {
 }
 }
 void ui_event_Back_Button1( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      _ui_screen_change( &ui_Autonomous_Mode_Select, LV_SCR_LOAD_ANIM_FADE_ON, 250, 0, &ui_Autonomous_Mode_Select_screen_init);
+}
+}
+void ui_event_Back_Button2( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
       _ui_screen_change( &ui_Autonomous_Mode_Select, LV_SCR_LOAD_ANIM_FADE_ON, 250, 0, &ui_Autonomous_Mode_Select_screen_init);
@@ -86,6 +111,7 @@ lv_disp_set_theme(dispp, theme);
 ui_Autonomous_Mode_Select_screen_init();
 ui_Selected_Left_screen_init();
 ui_Selected_Right_screen_init();
+ui_Selected_Skills_screen_init();
 ui____initial_actions0 = lv_obj_create(NULL);
 lv_disp_load_scr( ui_Autonomous_Mode_Select);
 }

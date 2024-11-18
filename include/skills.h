@@ -1,3 +1,3 @@
 #include "devices.h"
 
-void runOpcontrol();
+void runSkills();

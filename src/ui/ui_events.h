@@ -12,6 +12,7 @@ extern "C" {
 
 void setAutonLeft(lv_event_t * e);
 void setAutonRight(lv_event_t * e);
+void setAutonSkills(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

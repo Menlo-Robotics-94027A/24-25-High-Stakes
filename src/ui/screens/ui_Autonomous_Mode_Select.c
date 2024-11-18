@@ -40,7 +40,21 @@ lv_obj_set_height( ui_Right, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_align( ui_Right, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Right,"Right");
 
+ui_Skills_Button = lv_btn_create(ui_Autonomous_Mode_Select);
+lv_obj_set_width( ui_Skills_Button, 100);
+lv_obj_set_height( ui_Skills_Button, 50);
+lv_obj_set_x( ui_Skills_Button, 0 );
+lv_obj_set_y( ui_Skills_Button, -8 );
+lv_obj_set_align( ui_Skills_Button, LV_ALIGN_BOTTOM_MID );
+
+ui_Skills = lv_label_create(ui_Skills_Button);
+lv_obj_set_width( ui_Skills, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_Skills, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_Skills, LV_ALIGN_CENTER );
+lv_label_set_text(ui_Skills,"Skills");
+
 lv_obj_add_event_cb(ui_Left_Button, ui_event_Left_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Right_Button, ui_event_Right_Button, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_Skills_Button, ui_event_Skills_Button, LV_EVENT_ALL, NULL);
 
 }

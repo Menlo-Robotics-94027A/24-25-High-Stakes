@@ -24,6 +24,9 @@ extern lv_obj_t *ui_Left;
 void ui_event_Right_Button( lv_event_t * e);
 extern lv_obj_t *ui_Right_Button;
 extern lv_obj_t *ui_Right;
+void ui_event_Skills_Button( lv_event_t * e);
+extern lv_obj_t *ui_Skills_Button;
+extern lv_obj_t *ui_Skills;
 // SCREEN: ui_Selected_Left
 void ui_Selected_Left_screen_init(void);
 extern lv_obj_t *ui_Selected_Left;
@@ -38,6 +41,13 @@ extern lv_obj_t *ui_Right1;
 void ui_event_Back_Button1( lv_event_t * e);
 extern lv_obj_t *ui_Back_Button1;
 extern lv_obj_t *ui_Back_Button_Label1;
+// SCREEN: ui_Selected_Skills
+void ui_Selected_Skills_screen_init(void);
+extern lv_obj_t *ui_Selected_Skills;
+extern lv_obj_t *ui_Skills2;
+void ui_event_Back_Button2( lv_event_t * e);
+extern lv_obj_t *ui_Back_Button2;
+extern lv_obj_t *ui_Back_Button_Label2;
 extern lv_obj_t *ui____initial_actions0;
 
 
