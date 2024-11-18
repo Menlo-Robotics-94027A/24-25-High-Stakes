@@ -1,17 +1,19 @@
-#include "opcontrol.h"
-#include "pros/misc.h"
+#include "driver.hpp"
+#include "../devices/devices.hpp"
+#include "../devices/belt.hpp"
 
-void runOpcontrol() {
+void runDriverControl() {
   while (true) {
     // Get controller inputs
     int rightY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
     int leftX = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
-    // Move the robot (with steering priority)
+
+    // Move the robot (with slight steering priority)
     chassis.arcade(
         rightY, leftX, false,
         0.75); // High value = prioritize steering, low value = prioritize speed
 
-    // Pneumatics
+    // Pneumatics - Grabber Piston
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
       grabber_piston.set_value(HIGH);
     }
@@ -19,11 +21,19 @@ void runOpcontrol() {
       grabber_piston.set_value(LOW);
     }
 
+    // Pneumatics - Elevation Piston
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
       elevation_piston.set_value(HIGH);
     }
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
       elevation_piston.set_value(LOW);
+    }
+
+    // Pneumatics - Arm
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+      arm.set_value(HIGH);
+    } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
+      arm.set_value(LOW);
     }
 
     // Intake Rollers
@@ -41,20 +51,13 @@ void runOpcontrol() {
     // Intake Belt
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
       // Forwards
-      intake_belt.move(90);
+      setBeltState(BeltState::FORCE_INTAKE);
     } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
       // Backwards
-      intake_belt.move(-90);
+      setBeltState(BeltState::FORCE_OUTTAKE);
     } else {
       // Stop
-      intake_belt.move(0);
-    }
-
-    // Arm
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
-      arm.set_value(HIGH);
-    } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
-      arm.set_value(LOW);
+      setBeltState(BeltState::OFF);
     }
 
     // Sleep for 20ms (save resources, no need to update faster)

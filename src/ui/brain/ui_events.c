@@ -4,19 +4,19 @@
 // Project name: SquareLine_Project
 
 #include "ui.h"
-#include "auton.h"
+#include "../../auton/auton.hpp"
 
 void setAutonLeft(lv_event_t * e)
 {
-	auton_selected = 0;
+	setAutonMode(MATCH_LEFT);
 }
 
 void setAutonRight(lv_event_t * e)
 {
-	auton_selected = 1;
+	setAutonMode(MATCH_RIGHT);
 }
 
 void setAutonSkills(lv_event_t * e)
 {
-	auton_selected = 2;
+	setAutonMode(SKILLS);
 }
