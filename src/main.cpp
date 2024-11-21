@@ -8,8 +8,6 @@
 #include "ui/brain/ui.h"
 #include "ui/controller/controller_ui.hpp"
 
-ASSET(path_txt)
-
 void angular_tuning() {
     // set position to x:0, y:0, heading:0
     chassis.setPose(0, 0, 0);
@@ -48,7 +46,6 @@ void competition_initialize() {}
 void autonomous() { runAuton(); }
 void opcontrol() { 
   chassis.setPose(0, 0, 0);
-  // chassis.follow(path_txt, 15, 10000);
   // angular_tuning();
   // lateral_tuning();
   // runSkillsAuton();
