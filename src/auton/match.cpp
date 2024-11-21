@@ -24,7 +24,7 @@ void runMatchAuton(AutonMode mode) {
     chassis.setPose(0, 0, 0); // Relative coordinates rather than absolute
 
     // Move to ring stack (2ft)
-    chassis.moveToPoint(0, 24, 5000, {.maxSpeed = 50});
+    chassis.moveToPoint(0, 18, 5000, {.maxSpeed = 50});
     chassis.waitUntilDone();
 
     // Rotate to face ladder

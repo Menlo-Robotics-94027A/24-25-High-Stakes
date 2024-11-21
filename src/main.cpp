@@ -49,7 +49,7 @@ void opcontrol() {
   // angular_tuning();
   // lateral_tuning();
   // runSkillsAuton();
-  runMatchAuton(MATCH_LEFT);
-  // runDriverControl(); 
+  // runMatchAuton(MATCH_LEFT);
+  runDriverControl(); 
   }
 
