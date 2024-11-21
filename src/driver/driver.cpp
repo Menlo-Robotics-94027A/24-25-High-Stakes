@@ -1,6 +1,6 @@
 #include "driver.hpp"
-#include "../devices/devices.hpp"
-#include "../devices/belt.hpp"
+#include "devices/devices.hpp"
+#include "devices/belt.hpp"
 
 void runDriverControl() {
   while (true) {

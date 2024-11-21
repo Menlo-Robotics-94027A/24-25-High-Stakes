@@ -30,7 +30,7 @@ pros::Rotation horizontal_rotation_sensor(-8);
 pros::Rotation vertical_rotation_sensor(-11);
 
 pros::MotorGroup intake_belt({12}, pros::MotorGearset::blue);
-pros::MotorGroup intake_rollers({-13}, pros::MotorGearset::green);
+pros::MotorGroup intake_rollers({13}, pros::MotorGearset::green);
 
 // 3-Wire Devices
 // A: Grabber Piston
@@ -54,8 +54,27 @@ lemlib::Drivetrain drivetrain(&left_motors, &right_motors, 11.75,
                               lemlib::Omniwheel::NEW_275, 360, 2);
 
 // PID Tuning
-lemlib::ControllerSettings lateral_controller(12, 0, 5, 3, 1, 100, 3, 500, 0);
-lemlib::ControllerSettings angular_controller(3, 0, 10, 3, 1, 100, 3, 500, 0);
+lemlib::ControllerSettings lateral_controller(9, // proportional gain (kP)
+                                              0, // integral gain (kI)
+                                              15, // derivative gain (kD)
+                                              3, // anti windup
+                                              1, // small error range, in inches
+                                              100, // small error range timeout, in milliseconds
+                                              3, // large error range, in inches
+                                              500, // large error range timeout, in milliseconds
+                                              0 // maximum acceleration (slew)
+);
+
+lemlib::ControllerSettings angular_controller(8, // proportional gain (kP)
+                                              0, // integral gain (kI)
+                                              60, // derivative gain (kD)
+                                              3, // anti windup
+                                              1, // small error range, in inches
+                                              100, // small error range timeout, in milliseconds
+                                              3, // large error range, in inches
+                                                500, // large error range timeout, in milliseconds
+                                              0 // maximum acceleration (slew)
+);
 
 // Odometry Configuration
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_rotation_sensor,

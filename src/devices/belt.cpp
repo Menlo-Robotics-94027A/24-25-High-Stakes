@@ -21,7 +21,7 @@ void startBeltTask() {
 
       // Check if intake is stuck - if not forced
       if (belt_state == BeltState::INTAKE || belt_state == BeltState::OUTTAKE) {
-        if (intake_rollers.get_actual_velocity() < 0.1) {
+        if (intake_belt.get_actual_velocity() < 0.1) {
           stuck_count++;
 
           if (stuck_count > 5) {

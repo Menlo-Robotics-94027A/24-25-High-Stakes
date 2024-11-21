@@ -1,7 +1,7 @@
 #ifndef BELT_HPP
 #define BELT_HPP
 
-#define BELT_VOLTAGE 90 // Determine speed, from 0-127
+#define BELT_VOLTAGE 127 // Determine speed, from 0-127
 
 enum BeltState {
     OFF,
