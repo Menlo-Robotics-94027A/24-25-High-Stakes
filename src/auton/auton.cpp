@@ -1,4 +1,6 @@
 #include "auton.hpp"
+#include "devices/belt.hpp"
+#include "devices/devices.hpp"
 #include "skills.hpp"
 #include "match.hpp"
 
@@ -9,6 +11,9 @@ void setAutonMode(enum AutonMode mode) {
 }
 
 void runAuton() {
+    setBeltState(OFF);
+    intake_rollers.move(0);
+
     if (selected_mode == SKILLS) {
         runSkillsAuton();
         return;

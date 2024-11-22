@@ -35,6 +35,7 @@ void initialize() {
 
   // Calibrate Sensors
   chassis.calibrate(true);
+  pros::delay(50);
 
   // Reset pose
   chassis.setPose(0, 0, 0);
@@ -48,8 +49,8 @@ void opcontrol() {
   chassis.setPose(0, 0, 0);
   // angular_tuning();
   // lateral_tuning();
-  // runSkillsAuton();
+  runSkillsAuton();
   // runMatchAuton(MATCH_LEFT);
-  runDriverControl(); 
+  // runDriverControl(); 
   }
 
