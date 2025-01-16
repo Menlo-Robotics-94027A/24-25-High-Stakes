@@ -6,6 +6,7 @@
 #include "pros/imu.hpp"
 #include "pros/motor_group.hpp"
 #include "pros/rotation.hpp"
+#include "pros/optical.hpp"
 
 // LemLib API
 #include "lemlib/chassis/chassis.hpp"
@@ -21,9 +22,11 @@ extern pros::Rotation vertical_rotation_sensor;
 extern pros::MotorGroup intake_rollers;
 extern pros::MotorGroup intake_belt;
 
+extern pros::Optical optical_sensor;
+
 // 3-Wire Devices
 extern pros::adi::DigitalOut grabber_piston;
-extern pros::adi::DigitalOut elevation_piston;
+extern pros::adi::DigitalOut lift_piston;
 extern pros::adi::DigitalOut arm;
 
 // Wireless Devices

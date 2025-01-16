@@ -21,12 +21,12 @@ void runDriverControl() {
       grabber_piston.set_value(LOW);
     }
 
-    // Pneumatics - Elevation Piston
+    // Pneumatics - Lift Piston
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
-      elevation_piston.set_value(HIGH);
+      lift_piston.set_value(HIGH);
     }
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
-      elevation_piston.set_value(LOW);
+      lift_piston.set_value(LOW);
     }
 
     // Pneumatics - Arm

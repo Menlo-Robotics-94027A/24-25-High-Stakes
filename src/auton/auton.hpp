@@ -9,6 +9,8 @@ extern "C" {
 enum AutonMode {
     MATCH_LEFT,
     MATCH_RIGHT,
+    MATCH_LEFT_WP,
+    MATCH_RIGHT_WP,
     SKILLS
 };
 

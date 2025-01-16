@@ -1,40 +1,42 @@
 #include "devices.hpp"
 
 // Smart Port Devices
-// 1: Left Motor 1
-// 2: Left Motor 2
-// 3: Left Motor 3
+// 1: Right Motor 1
+// 2: Right Motor 2
+// 3: Right Motor 3
 // 4: *Empty*
 // 5: *Empty*
 // 6: *Empty*
 // 7: Inertial Sensor
-// 8: *Empty*
+// 8: Horizontal Rotation Sensor
 // 9: *Empty*
 // 10: *Empty*
 // 11: Vertical Rotation Sensor
 // 12: Intake Belt
 // 13: Intake Rollers
 // 14: *Empty*
-// 15: *Empty*
+// 15: Optical Sensor
 // 16: *Empty*
 // 17: *Empty*
-// 18: Right Motor 1
-// 19: Right Motor 2
-// 20: Right Motor 3
-// 21: *Empty*
-pros::MotorGroup left_motors({-1, -2, -3}, pros::MotorGearset::green);
-pros::MotorGroup right_motors({18, 19, 20}, pros::MotorGearset::green);
+// 18: Left Motor 1
+// 19: Left Motor 2
+// 20: Left Motor 3
+// 21: Radio
+pros::MotorGroup left_motors({-18, -19, -20}, pros::MotorGearset::green);
+pros::MotorGroup right_motors({1, 2, 3}, pros::MotorGearset::green);
 
 pros::Imu inertial_sensor(7);
 pros::Rotation horizontal_rotation_sensor(-8);
 pros::Rotation vertical_rotation_sensor(-11);
 
 pros::MotorGroup intake_belt({12}, pros::MotorGearset::blue);
-pros::MotorGroup intake_rollers({13}, pros::MotorGearset::green);
+pros::MotorGroup intake_rollers({-13}, pros::MotorGearset::green);
+
+pros::Optical optical_sensor(15);
 
 // 3-Wire Devices
 // A: Grabber Piston
-// B: Elevation Piston
+// B: Lift Piston
 // C: Arm
 // D: *Empty*
 // E: *Empty*
@@ -42,8 +44,9 @@ pros::MotorGroup intake_rollers({13}, pros::MotorGearset::green);
 // G: *Empty*
 // H: *Empty*
 pros::adi::DigitalOut grabber_piston('A', LOW);
-pros::adi::DigitalOut elevation_piston('B', HIGH);
+pros::adi::DigitalOut lift_piston('B', LOW);
 pros::adi::DigitalOut arm('C', LOW);
+
 
 // Wireless Devices
 pros::Controller controller(pros::E_CONTROLLER_MASTER);

@@ -3,8 +3,8 @@
 // LVGL version: 8.3.6
 // Project name: SquareLine_Project
 
+#include "auton/auton.hpp"
 #include "ui.h"
-#include "../../auton/auton.hpp"
 
 void setAutonLeft(lv_event_t * e)
 {
@@ -19,4 +19,14 @@ void setAutonRight(lv_event_t * e)
 void setAutonSkills(lv_event_t * e)
 {
 	setAutonMode(SKILLS);
+}
+
+void setAutonRightWP(lv_event_t * e)
+{
+	setAutonMode(MATCH_RIGHT_WP);
+}
+
+void setAutonLeftWP(lv_event_t * e)
+{
+	setAutonMode(MATCH_LEFT_WP);
 }

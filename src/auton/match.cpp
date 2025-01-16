@@ -34,7 +34,7 @@ void runMatchAuton(AutonMode mode) {
     chassis.moveToPoint(mode == MATCH_RIGHT ? 10 : -10, 30, 5000, {.forwards = false, .maxSpeed = 50}); // Move right a little to avoid the cones at the base
     
     // Disable conveyor & rollers on way to ladder
-    chassis.waitUntil(15);
+    chassis.waitUntil(25);
     setBeltState(OFF);
     intake_rollers.move(0);
 

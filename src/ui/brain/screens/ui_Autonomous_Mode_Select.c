@@ -14,9 +14,8 @@ ui_Left_Button = lv_btn_create(ui_Autonomous_Mode_Select);
 lv_obj_set_width( ui_Left_Button, 100);
 lv_obj_set_height( ui_Left_Button, 50);
 lv_obj_set_x( ui_Left_Button, 8 );
-lv_obj_set_y( ui_Left_Button, 0 );
-lv_obj_set_align( ui_Left_Button, LV_ALIGN_LEFT_MID );
-lv_obj_set_style_bg_color(ui_Left_Button, lv_color_hex(0x1A79C3), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_y( ui_Left_Button, 8 );
+lv_obj_set_style_bg_color(ui_Left_Button, lv_color_hex(0xC31A1A), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Left_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_Left = lv_label_create(ui_Left_Button);
@@ -29,8 +28,8 @@ ui_Right_Button = lv_btn_create(ui_Autonomous_Mode_Select);
 lv_obj_set_width( ui_Right_Button, 100);
 lv_obj_set_height( ui_Right_Button, 50);
 lv_obj_set_x( ui_Right_Button, -8 );
-lv_obj_set_y( ui_Right_Button, 0 );
-lv_obj_set_align( ui_Right_Button, LV_ALIGN_RIGHT_MID );
+lv_obj_set_y( ui_Right_Button, -64 );
+lv_obj_set_align( ui_Right_Button, LV_ALIGN_BOTTOM_RIGHT );
 lv_obj_set_style_bg_color(ui_Right_Button, lv_color_hex(0x1A79C3), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_Right_Button, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
@@ -53,8 +52,40 @@ lv_obj_set_height( ui_Skills, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_align( ui_Skills, LV_ALIGN_CENTER );
 lv_label_set_text(ui_Skills,"Skills");
 
+ui_WPRight = lv_btn_create(ui_Autonomous_Mode_Select);
+lv_obj_set_width( ui_WPRight, 100);
+lv_obj_set_height( ui_WPRight, 50);
+lv_obj_set_x( ui_WPRight, -8 );
+lv_obj_set_y( ui_WPRight, 8 );
+lv_obj_set_align( ui_WPRight, LV_ALIGN_TOP_RIGHT );
+lv_obj_set_style_bg_color(ui_WPRight, lv_color_hex(0xC31A1A), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_WPRight, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_WPRight1 = lv_label_create(ui_WPRight);
+lv_obj_set_width( ui_WPRight1, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_WPRight1, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_WPRight1, LV_ALIGN_CENTER );
+lv_label_set_text(ui_WPRight1,"WP Right");
+
+ui_WPLeft = lv_btn_create(ui_Autonomous_Mode_Select);
+lv_obj_set_width( ui_WPLeft, 100);
+lv_obj_set_height( ui_WPLeft, 50);
+lv_obj_set_x( ui_WPLeft, 8 );
+lv_obj_set_y( ui_WPLeft, -64 );
+lv_obj_set_align( ui_WPLeft, LV_ALIGN_BOTTOM_LEFT );
+lv_obj_set_style_bg_color(ui_WPLeft, lv_color_hex(0x1A79C3), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_WPLeft, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_WPLeft1 = lv_label_create(ui_WPLeft);
+lv_obj_set_width( ui_WPLeft1, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_WPLeft1, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_WPLeft1, LV_ALIGN_CENTER );
+lv_label_set_text(ui_WPLeft1,"WP Left");
+
 lv_obj_add_event_cb(ui_Left_Button, ui_event_Left_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Right_Button, ui_event_Right_Button, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_Skills_Button, ui_event_Skills_Button, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_WPRight, ui_event_WPRight, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_WPLeft, ui_event_WPLeft, LV_EVENT_ALL, NULL);
 
 }

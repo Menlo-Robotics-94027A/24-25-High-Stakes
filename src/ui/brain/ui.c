@@ -5,6 +5,7 @@
 
 #include "ui.h"
 #include "ui_helpers.h"
+#include "ui_events.h"
 
 ///////////////////// VARIABLES ////////////////////
 
@@ -21,6 +22,12 @@ lv_obj_t *ui_Right;
 void ui_event_Skills_Button( lv_event_t * e);
 lv_obj_t *ui_Skills_Button;
 lv_obj_t *ui_Skills;
+void ui_event_WPRight( lv_event_t * e);
+lv_obj_t *ui_WPRight;
+lv_obj_t *ui_WPRight1;
+void ui_event_WPLeft( lv_event_t * e);
+lv_obj_t *ui_WPLeft;
+lv_obj_t *ui_WPLeft1;
 
 
 // SCREEN: ui_Selected_Left
@@ -48,6 +55,24 @@ lv_obj_t *ui_Skills2;
 void ui_event_Back_Button2( lv_event_t * e);
 lv_obj_t *ui_Back_Button2;
 lv_obj_t *ui_Back_Button_Label2;
+
+
+// SCREEN: ui_Selected_WP_Left
+void ui_Selected_WP_Left_screen_init(void);
+lv_obj_t *ui_Selected_WP_Left;
+lv_obj_t *ui_Left2;
+void ui_event_Back_Button3( lv_event_t * e);
+lv_obj_t *ui_Back_Button3;
+lv_obj_t *ui_Back_Button_Label3;
+
+
+// SCREEN: ui_Selected_WP_Right
+void ui_Selected_WP_Right_screen_init(void);
+lv_obj_t *ui_Selected_WP_Right;
+lv_obj_t *ui_Left3;
+void ui_event_Back_Button4( lv_event_t * e);
+lv_obj_t *ui_Back_Button4;
+lv_obj_t *ui_Back_Button_Label4;
 lv_obj_t *ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -71,7 +96,7 @@ if ( event_code == LV_EVENT_CLICKED) {
 void ui_event_Right_Button( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      setAutonRight( e );
+      setAutonRight(e);
       _ui_screen_change( &ui_Selected_Right, LV_SCR_LOAD_ANIM_FADE_ON, 250, 0, &ui_Selected_Right_screen_init);
 }
 }
@@ -80,6 +105,20 @@ void ui_event_Skills_Button( lv_event_t * e) {
 if ( event_code == LV_EVENT_CLICKED) {
       _ui_screen_change( &ui_Selected_Skills, LV_SCR_LOAD_ANIM_FADE_ON, 250, 0, &ui_Selected_Skills_screen_init);
       setAutonSkills( e );
+}
+}
+void ui_event_WPRight( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      setAutonRight( e );
+      _ui_screen_change( &ui_Selected_WP_Right, LV_SCR_LOAD_ANIM_FADE_ON, 250, 0, &ui_Selected_WP_Right_screen_init);
+}
+}
+void ui_event_WPLeft( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      setAutonLeftWP( e );
+      _ui_screen_change( &ui_Selected_WP_Left, LV_SCR_LOAD_ANIM_FADE_ON, 250, 0, &ui_Selected_WP_Left_screen_init);
 }
 }
 void ui_event_Back_Button( lv_event_t * e) {
@@ -100,6 +139,18 @@ if ( event_code == LV_EVENT_CLICKED) {
       _ui_screen_change( &ui_Autonomous_Mode_Select, LV_SCR_LOAD_ANIM_FADE_ON, 250, 0, &ui_Autonomous_Mode_Select_screen_init);
 }
 }
+void ui_event_Back_Button3( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      _ui_screen_change( &ui_Autonomous_Mode_Select, LV_SCR_LOAD_ANIM_FADE_ON, 250, 0, &ui_Autonomous_Mode_Select_screen_init);
+}
+}
+void ui_event_Back_Button4( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      _ui_screen_change( &ui_Autonomous_Mode_Select, LV_SCR_LOAD_ANIM_FADE_ON, 250, 0, &ui_Autonomous_Mode_Select_screen_init);
+}
+}
 
 ///////////////////// SCREENS ////////////////////
 
@@ -112,6 +163,8 @@ ui_Autonomous_Mode_Select_screen_init();
 ui_Selected_Left_screen_init();
 ui_Selected_Right_screen_init();
 ui_Selected_Skills_screen_init();
+ui_Selected_WP_Left_screen_init();
+ui_Selected_WP_Right_screen_init();
 ui____initial_actions0 = lv_obj_create(NULL);
 lv_disp_load_scr( ui_Autonomous_Mode_Select);
 }

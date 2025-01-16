@@ -27,6 +27,12 @@ extern lv_obj_t *ui_Right;
 void ui_event_Skills_Button( lv_event_t * e);
 extern lv_obj_t *ui_Skills_Button;
 extern lv_obj_t *ui_Skills;
+void ui_event_WPRight( lv_event_t * e);
+extern lv_obj_t *ui_WPRight;
+extern lv_obj_t *ui_WPRight1;
+void ui_event_WPLeft( lv_event_t * e);
+extern lv_obj_t *ui_WPLeft;
+extern lv_obj_t *ui_WPLeft1;
 // SCREEN: ui_Selected_Left
 void ui_Selected_Left_screen_init(void);
 extern lv_obj_t *ui_Selected_Left;
@@ -48,6 +54,20 @@ extern lv_obj_t *ui_Skills2;
 void ui_event_Back_Button2( lv_event_t * e);
 extern lv_obj_t *ui_Back_Button2;
 extern lv_obj_t *ui_Back_Button_Label2;
+// SCREEN: ui_Selected_WP_Left
+void ui_Selected_WP_Left_screen_init(void);
+extern lv_obj_t *ui_Selected_WP_Left;
+extern lv_obj_t *ui_Left2;
+void ui_event_Back_Button3( lv_event_t * e);
+extern lv_obj_t *ui_Back_Button3;
+extern lv_obj_t *ui_Back_Button_Label3;
+// SCREEN: ui_Selected_WP_Right
+void ui_Selected_WP_Right_screen_init(void);
+extern lv_obj_t *ui_Selected_WP_Right;
+extern lv_obj_t *ui_Left3;
+void ui_event_Back_Button4( lv_event_t * e);
+extern lv_obj_t *ui_Back_Button4;
+extern lv_obj_t *ui_Back_Button_Label4;
 extern lv_obj_t *ui____initial_actions0;
 
 

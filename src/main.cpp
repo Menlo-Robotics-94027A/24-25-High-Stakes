@@ -2,6 +2,7 @@
 #include "auton/auton.hpp"
 #include "auton/match.hpp"
 #include "auton/skills.hpp"
+#include "auton/wp.hpp"
 #include "devices/belt.hpp"
 #include "devices/devices.hpp"
 #include "driver/driver.hpp"
@@ -36,6 +37,7 @@ void initialize() {
   // Calibrate Sensors
   chassis.calibrate(true);
   pros::delay(50);
+  optical_sensor.set_led_pwm(100);
 
   // Reset pose
   chassis.setPose(0, 0, 0);
@@ -51,6 +53,9 @@ void opcontrol() {
   // lateral_tuning();
   // runSkillsAuton();
   // runMatchAuton(MATCH_LEFT);
+  // runMatchAutonWP(MATCH_LEFT_WP);
+  // setBeltState(BeltState::INTAKE);
+  // grabber_piston.set_value(HIGH);
   runDriverControl(); 
   }
 

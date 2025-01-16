@@ -2,6 +2,8 @@ SET(SOURCES screens/ui_Autonomous_Mode_Select.c
     screens/ui_Selected_Left.c
     screens/ui_Selected_Right.c
     screens/ui_Selected_Skills.c
+    screens/ui_Selected_WP_Left.c
+    screens/ui_Selected_WP_Right.c
     ui.c
     components/ui_comp_hook.c
     ui_helpers.c
