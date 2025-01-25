@@ -51,13 +51,13 @@ void runDriverControl() {
     // Intake Belt
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
       // Forwards
-      setBeltState(BeltState::FORCE_INTAKE);
+      setBeltState(BeltState::BELT_INTAKE);
     } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
       // Backwards
-      setBeltState(BeltState::FORCE_OUTTAKE);
+      setBeltState(BeltState::BELT_OUTTAKE);
     } else {
       // Stop
-      setBeltState(BeltState::OFF);
+      setBeltState(BeltState::BELT_OFF);
     }
 
     // Sleep for 20ms (save resources, no need to update faster)

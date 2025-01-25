@@ -15,7 +15,7 @@ void runMatchAuton(AutonMode mode) {
     pros::delay(750);
 
     // Enable conveyor & rollers
-    setBeltState(INTAKE); // Not forced, so the jam prevention will work
+    setBeltState(BELT_INTAKE); // Not forced, so the jam prevention will work
     intake_rollers.move(127);
 
     // Rotate to face ring stack
@@ -35,7 +35,7 @@ void runMatchAuton(AutonMode mode) {
     
     // Disable conveyor & rollers on way to ladder
     chassis.waitUntil(25);
-    setBeltState(OFF);
+    setBeltState(BELT_OFF);
     intake_rollers.move(0);
 
     return;

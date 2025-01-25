@@ -16,7 +16,7 @@ void runMatchAutonWP(AutonMode mode) {
     pros::delay(250);
 
     // Enable conveyor & rollers
-    setBeltState(INTAKE); // Not forced, so the jam prevention will work
+    setBeltState(BELT_INTAKE); // Not forced, so the jam prevention will work
     intake_rollers.move(127);
 
     // Rotate to face ring stack

@@ -7,7 +7,7 @@ void runSkillsAuton() {
     pros::delay(50);
 
     // Enable conveyor & rollers
-    setBeltState(INTAKE); // Not forced, so the jam prevention will work
+    setBeltState(BELT_INTAKE); // Not forced, so the jam prevention will work
     intake_rollers.move(127);
     
     // Wait 1000ms to score preload on allience stake
@@ -104,9 +104,9 @@ void runSkillsAuton() {
 
     // Drop mobile goal #1
     grabber_piston.set_value(LOW);
-    setBeltState(OUTTAKE);
+    setBeltState(BELT_OUTTAKE);
     pros::delay(500);
-    setBeltState(INTAKE);
+    setBeltState(BELT_INTAKE);
 
     // Reset Pose
     chassis.setPose(0, 0, 0); // Relative coordinates rather than absolute
@@ -202,9 +202,9 @@ void runSkillsAuton() {
 
     // Drop mobile goal #1
     grabber_piston.set_value(LOW);
-    setBeltState(OUTTAKE);
+    setBeltState(BELT_OUTTAKE);
     pros::delay(500);
-    setBeltState(INTAKE);
+    setBeltState(BELT_INTAKE);
 
     // Reset Pose
     chassis.setPose(0, 0, 0); // Relative coordinates rather than absolute

@@ -13,7 +13,7 @@ void setAutonMode(enum AutonMode mode) {
 }
 
 void runAuton() {
-    setBeltState(OFF);
+    setBeltState(BELT_OFF);
     intake_rollers.move(0);
 
     if (selected_mode == SKILLS) {

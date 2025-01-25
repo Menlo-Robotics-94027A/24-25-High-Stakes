@@ -1,4 +1,5 @@
 #include "devices.hpp"
+#include "lemlib/chassis/trackingWheel.hpp"
 
 // Smart Port Devices
 // 1: Right Motor 1
@@ -26,7 +27,7 @@ pros::MotorGroup left_motors({-18, -19, -20}, pros::MotorGearset::green);
 pros::MotorGroup right_motors({1, 2, 3}, pros::MotorGearset::green);
 
 pros::Imu inertial_sensor(7);
-pros::Rotation horizontal_rotation_sensor(-8);
+pros::Rotation horizontal_rotation_sensor(8);
 pros::Rotation vertical_rotation_sensor(-11);
 
 pros::MotorGroup intake_belt({12}, pros::MotorGearset::blue);
@@ -53,13 +54,24 @@ pros::Controller controller(pros::E_CONTROLLER_MASTER);
 pros::Controller partner_controller(pros::E_CONTROLLER_PARTNER);
 
 // Drivetrain Configuration
-lemlib::Drivetrain drivetrain(&left_motors, &right_motors, 11.75,
+lemlib::Drivetrain drivetrain(&left_motors, &right_motors, 13.25,
                               lemlib::Omniwheel::NEW_275, 360, 2);
 
 // PID Tuning
-lemlib::ControllerSettings lateral_controller(9, // proportional gain (kP)
+lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              15, // derivative gain (kD)
+                                              3, // derivative gain (kD)
+                                              3, // anti windup
+                                              1, // small error range, in inches
+                                              100, // small error range timeout, in milliseconds
+                                              3, // large error range, in inches
+                                              500, // large error range timeout, in milliseconds
+                                              20 // maximum acceleration (slew)
+);
+
+lemlib::ControllerSettings angular_controller(3, // proportional gain (kP)
+                                              0, // integral gain (kI)
+                                              12, // derivative gain (kD)
                                               3, // anti windup
                                               1, // small error range, in inches
                                               100, // small error range timeout, in milliseconds
@@ -68,23 +80,12 @@ lemlib::ControllerSettings lateral_controller(9, // proportional gain (kP)
                                               0 // maximum acceleration (slew)
 );
 
-lemlib::ControllerSettings angular_controller(8, // proportional gain (kP)
-                                              0, // integral gain (kI)
-                                              60, // derivative gain (kD)
-                                              3, // anti windup
-                                              1, // small error range, in inches
-                                              100, // small error range timeout, in milliseconds
-                                              3, // large error range, in inches
-                                                500, // large error range timeout, in milliseconds
-                                              0 // maximum acceleration (slew)
-);
-
 // Odometry Configuration
 lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_rotation_sensor,
-                                                lemlib::Omniwheel::NEW_275, 7);
+                                                lemlib::Omniwheel::NEW_2, -2.5); // 2 3/4 inches back
 lemlib::TrackingWheel vertical_tracking_wheel(&vertical_rotation_sensor,
-                                              lemlib::Omniwheel::NEW_275,
-                                              -0.75);
+                                              lemlib::Omniwheel::NEW_2,
+                                              -1.125); // 1 1/8 inches left
 
 lemlib::OdomSensors odometry_sensors(&vertical_tracking_wheel, nullptr,
                                      &horizontal_tracking_wheel, nullptr,
