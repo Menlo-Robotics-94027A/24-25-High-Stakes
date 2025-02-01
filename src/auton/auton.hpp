@@ -1,24 +1,22 @@
 #ifndef AUTON_HPP
 #define AUTON_HPP
 
-// Allows this C++ header to be used in C code, which is the default language used by SquareLine Studio
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-enum AutonMode {
-    MATCH_LEFT,
-    MATCH_RIGHT,
-    MATCH_LEFT_WP,
-    MATCH_RIGHT_WP,
-    SKILLS
+enum AutonCategory {
+    AUTON_RED,
+    AUTON_BLUE,
+    AUTON_SKILLS,
+    AUTON_DEBUG
 };
 
-void setAutonMode(enum AutonMode mode);
-void runAuton();
+struct Auton {
+    const char* name;
+    void (*function)();
+    AutonCategory category;
+};
 
-#ifdef __cplusplus
-}
-#endif
+extern Auton selected_auton;
+extern Auton autons[];
+
+void runAuton();
 
 #endif

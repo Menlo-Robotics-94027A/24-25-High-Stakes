@@ -6,6 +6,7 @@
 BeltState belt_state = BeltState::BELT_OFF;
 ColorSortState color_sort_state = ColorSortState::COLOR_SORT_NONE;
 AntiLockState anti_lock_state = AntiLockState::ANTI_LOCK_OFF;
+AutoHoldState auto_hold_state = AutoHoldState::AUTO_HOLD_OFF;
 
 // Setters
 void setBeltState(BeltState state)
@@ -15,10 +16,15 @@ void setBeltState(BeltState state)
 void setColorSortState(ColorSortState state)
 {
   color_sort_state = state;
+  printf("Color Sort State: %d\n", state);
 }
 void setAntiLockState(AntiLockState state)
 {
   anti_lock_state = state;
+}
+void setAutoHoldState(AutoHoldState state)
+{
+  auto_hold_state = state;
 }
 
 // Getters
@@ -34,10 +40,15 @@ AntiLockState getAntiLockState()
 {
   return anti_lock_state;
 }
+AutoHoldState getAutoHoldState()
+{
+  return auto_hold_state;
+}
 
 // Anti-Lock & Color Sort Thresholds
 int belt_stuck_count = 0;
 int color_sort_count = 0;
+int belt_hold_count = 0;
 
 // Anti-Lock
 void antiLock()
@@ -98,9 +109,11 @@ void colorSort()
       // Check if threshold has been met
       if (color_sort_count > TRIGGER_THRESHOLD)
       {
-        // Set speed to 100% for LAUNCH_DELAY ms
-        intake_belt.move(127);
-        pros::delay(LAUNCH_DELAY);
+        intake_belt.tare_position();
+        while (intake_belt.get_position() < LAUNCH_DISTANCE)
+        {
+          pros::delay(5);
+        }
 
         // Stop belt for LAUNCH_SLEEP ms
         intake_belt.move(0);
@@ -109,6 +122,57 @@ void colorSort()
         // Resume normal operation
         color_sort_count = 0;
         intake_belt.move(BELT_VOLTAGE);
+      }
+    } else {
+      color_sort_count = 0;
+    }
+  } else {
+    color_sort_count = 0;
+  }
+}
+
+// Auto-Hold
+void autoHold()
+{
+  // Check if belt is running
+  if (getBeltState() == BeltState::BELT_INTAKE)
+  {
+    // Check if a ring is detected (same color as color sort, or if none, either color)
+    if (optical_sensor.get_proximity() > 200)
+    {
+      // Check the color
+      pros::c::optical_rgb_s_t rgb = optical_sensor.get_rgb();
+
+      // Log rgb blue and red
+      printf("Red: %d, Blue: %d\n", rgb.red, rgb.blue);
+
+      if ((getColorSortState() == ColorSortState::COLOR_SORT_BLUE && rgb.red > rgb.blue) ||
+          (getColorSortState() == ColorSortState::COLOR_SORT_RED && rgb.blue > rgb.red) ||
+          getColorSortState() == ColorSortState::COLOR_SORT_NONE || getAutoHoldState() == AutoHoldState::AUTO_HOLD_ANY)
+      {
+        belt_hold_count++;
+      }
+      else
+      {
+        belt_hold_count = 0;
+      }
+
+      // Check if threshold has been met
+      if (belt_hold_count > HOLD_THRESHOLD)
+      {
+        // Reverse belt to ensure ring is fully in
+        intake_belt.move(-BELT_VOLTAGE);
+        pros::delay(HOLD_REVERSE_TIME);
+
+        // Stop belt
+        intake_belt.move(0);
+
+        // Update Belt State
+        setAutoHoldState(AutoHoldState::AUTO_HOLD_OFF);
+        setBeltState(BeltState::BELT_OFF);
+
+        // Reset hold count
+        belt_hold_count = 0;
       }
     }
   }
@@ -121,6 +185,9 @@ void startBeltTask()
                        {
     // Main Loop
     while (true) {
+      // 0. Turn on LED
+      optical_sensor.set_led_pwm(100);
+      
       // 1. Configure movement direction
       if (getBeltState() == BeltState::BELT_INTAKE) {
         intake_belt.move(BELT_VOLTAGE);
@@ -130,19 +197,25 @@ void startBeltTask()
         intake_belt.move(0);
       }
 
-      // 2. Check if intake is stuck - if enabled
-      antiLock();
+      // 2. Check auto hold
+      if (getAutoHoldState() != AutoHoldState::AUTO_HOLD_OFF) {
+        autoHold();
+      }
 
-      // 3. Check if color sort is enabled
+      // 3. Check if intake is stuck - if enabled
+      if (getBeltState() == BeltState::BELT_INTAKE && getAntiLockState() == AntiLockState::ANTI_LOCK_ON) {
+        antiLock();
+      } else {
+        belt_stuck_count = 0;
+      }
+
+      // 4. Check if color sort is enabled
       if (getColorSortState() != ColorSortState::COLOR_SORT_NONE) {
-        // Enable optical LED
-        optical_sensor.set_led_pwm(100);
-
         // Run Color Sort
         colorSort();
-      } else {
-        // Turn off optical LED
-        optical_sensor.set_led_pwm(0);
       }
+
+      // Sleep for 10ms
+      pros::delay(10);
     } });
 }

@@ -3,7 +3,7 @@
 #include "devices/belt.hpp"
 #include "devices/devices.hpp"
 #include "driver/driver.hpp"
-#include "ui/brain/ui.h"
+#include "ui/brain/brain_ui.hpp"
 #include "ui/controller/controller_ui.hpp"
 
 ASSET(path_jerryio_txt);
@@ -16,7 +16,7 @@ void angular_tuning() {
 }
 
 void lateral_tuning() {
-       // set position to x:0, y:0, heading:0
+    // set position to x:0, y:0, heading:0
     chassis.setPose(0, 0, 0);
     // move 48" forwards
     chassis.moveToPoint(0, 48, 10000);
@@ -52,7 +52,7 @@ void diamond() {
 
 void initialize() {
   // Initialize Brain UI 
-  ui_init();
+  startBrainUI();
 
   // Initialize the controller UI
   startControllerUITask();
@@ -62,7 +62,7 @@ void initialize() {
 
   // Calibrate Sensors
   chassis.calibrate(true);
-  pros::delay(50);
+  pros::delay(1500);
   optical_sensor.set_integration_time(20.0);
 
   // Reset pose
@@ -74,16 +74,22 @@ void competition_initialize() {}
 void autonomous() { runAuton(); }
 void opcontrol() { 
   chassis.setPose(0, 0, 0);
-  pros::delay(1000);
   // chassis.follow(path_jerryio_txt, 15, 20000);
   // angular_tuning();
   // lateral_tuning();
   // runSkillsAuton();
   // diamond();
+  runAuton();
   // runMatchAuton(MATCH_LEFT);
   // runMatchAutonWP(MATCH_LEFT_WP);
   // setBeltState(BeltState::BELT_INTAKE);
   // grabber_piston.set_value(HIGH);
-  runDriverControl(); 
+  // setColorSortState(ColorSortState::COLOR_SORT_RED);
+  // runDriverControl(); 
+    // setColorSortState(ColorSortState::COLOR_SORT_RED);
+    // setAutoHoldState(AutoHoldState::AUTO_HOLD_ANY);
+    // setBeltState(BeltState::BELT_INTAKE);
+    // pros::delay(5000);
+    // setBeltState(BeltState::BELT_INTAKE);
   }
 

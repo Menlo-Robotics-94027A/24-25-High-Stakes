@@ -60,7 +60,7 @@ lemlib::Drivetrain drivetrain(&left_motors, &right_motors, 13.25,
 // PID Tuning
 lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              3, // derivative gain (kD)
+                                              36, // derivative gain (kD)
                                               3, // anti windup
                                               1, // small error range, in inches
                                               100, // small error range timeout, in milliseconds
@@ -71,13 +71,13 @@ lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
 
 lemlib::ControllerSettings angular_controller(3, // proportional gain (kP)
                                               0, // integral gain (kI)
-                                              12, // derivative gain (kD)
+                                              20, // derivative gain (kD)
                                               3, // anti windup
                                               1, // small error range, in inches
                                               100, // small error range timeout, in milliseconds
                                               3, // large error range, in inches
                                               500, // large error range timeout, in milliseconds
-                                              0 // maximum acceleration (slew)
+                                              30 // maximum acceleration (slew)
 );
 
 // Odometry Configuration
