@@ -46,7 +46,7 @@ void blueLeft()
     chassis.turnToPoint(24, -24, 1000, {.forwards = false});
 
     // Move to second goal @ 24, -24 (extra 2" to ensure grab)
-    chassis.moveToPoint(22, -26, 5000, {.forwards = false, .maxSpeed = 75});
+    chassis.moveToPoint(20, -28, 5000, {.forwards = false, .maxSpeed = 75});
     chassis.waitUntilDone();
 
     // Pickup goal
@@ -68,16 +68,16 @@ void blueLeft()
 void blueRight()
 {
     // Set pose to start position
-    chassis.setPose(59, 15, 0);
+    chassis.setPose(59, 15, 0); // maybe 58, 15, 0
 
-    // Move to alliance stake (2" offset for wonky turning)
-    chassis.moveToPoint(60, 3, 10000, {.forwards = false});
+    // Move to alliance stake (2.5" offset for wonky turning)
+    chassis.moveToPoint(59, 2.5, 10000, {.forwards = false});
 
     // Turn towards alliance stake
     chassis.turnToHeading(-90, 10000);
 
     // Move back to start position
-    chassis.moveToPoint(61.75, 0, 5000);
+    chassis.moveToPoint(62.5, 0, 5000);
 
     // Wait until done to score
     chassis.waitUntilDone();
@@ -87,7 +87,7 @@ void blueRight()
     pros::delay(1000);
 
     // Back away from wall
-    chassis.moveToPoint(48, 0, 10000);
+    chassis.moveToPoint(54, 0, 10000);
 
     // Turn towards mobile goal
     chassis.turnToPoint(24, 24, 1000, {.forwards = false});
@@ -121,15 +121,13 @@ void blueRight()
     // Wait 1s to score
     pros::delay(1000);
 
-    // Turn off rollers
-    intake_rollers.move(0);
-
     // Move to ladder
     chassis.moveToPoint(12, 12, 10000);
 
     // Turn off belt
     chassis.waitUntil(24);
     setBeltState(BeltState::BELT_OFF);
+    intake_rollers.move(0);
 
     // Move to center slowly
     chassis.moveToPoint(0,0,10000, {.maxSpeed = 30});
@@ -138,13 +136,13 @@ void blueRight()
 void redRight()
 {
     // Set pose to start position
-    chassis.setPose(-54, -21, 135);
+    chassis.setPose(-55, -24, 135);
 
     // Turn on rollers
     intake_rollers.move(127);
 
     // Move to ring stack @ 24, -48 (1.5" offset for turning)
-    chassis.moveToPoint(-24, -49.5, 5000);
+    chassis.moveToPoint(-24, -46.5, 5000);
     chassis.waitUntilDone();
 
     // Turn towards mobile goal #1
@@ -198,20 +196,19 @@ void redRight()
     intake_rollers.move(0);
 }
 
-
 void redLeft()
 {
     // Set pose to start position
     chassis.setPose(-59, 15, 0);
 
-    // Move to alliance stake (2" offset for wonky turning)
-    chassis.moveToPoint(-60, 3, 10000, {.forwards = false});
+    // Move to alliance stake
+    chassis.moveToPoint(-59, 1, 10000, {.forwards = false});
 
     // Turn towards alliance stake
     chassis.turnToHeading(90, 10000);
 
     // Move back to start position
-    chassis.moveToPoint(-61.75, 0, 5000);
+    chassis.moveToPoint(-62.5, 0, 5000);
 
     // Wait until done to score
     chassis.waitUntilDone();
@@ -221,13 +218,13 @@ void redLeft()
     pros::delay(1000);
 
     // Back away from wall
-    chassis.moveToPoint(-48, 0, 10000);
+    chassis.moveToPoint(-56, 0, 10000);
 
     // Turn towards mobile goal
     chassis.turnToPoint(-24, 24, 1000, {.forwards = false});
 
     // Move to mobile goal (extra 4" to ensure grab)
-    chassis.moveToPoint(-28, 20, 10000, {.forwards = false, .maxSpeed = 75});
+    chassis.moveToPoint(-26, 22, 10000, {.forwards = false, .maxSpeed = 75});
     chassis.waitUntilDone();
 
     // Pickup goal
@@ -236,14 +233,14 @@ void redLeft()
 
     // Move torward rings @ 0,0 (extra 4" for target, extra 12" for grab)
     chassis.turnToPoint(-4, 44, 1000);
-    chassis.moveToPoint(-12, 36, 10000);
+    chassis.moveToPoint(-11, 36, 10000);
 
     // Run rollers
     intake_rollers.move(127);
     chassis.waitUntilDone();
     
     // Collect additional rings in center stack
-    chassis.moveToPose(-12, 50, 0, 10000);
+    chassis.moveToPose(-11, 50, 0, 10000);
 
     // Turn towards second ring stack
     chassis.turnToHeading(-90, 1000);
@@ -255,23 +252,40 @@ void redLeft()
     // Wait 1s to score
     pros::delay(1000);
 
-    // Turn off rollers
-    intake_rollers.move(0);
-
     // Move to ladder
     chassis.moveToPoint(-12, 12, 10000);
 
     // Turn off belt
     chassis.waitUntil(24);
     setBeltState(BeltState::BELT_OFF);
+    intake_rollers.move(0);
 
     // Move to center slowly
     chassis.moveToPoint(0,0,10000, {.maxSpeed = 30});
 }
 
+void skillsAuton() {
+    // Set starting position
+    chassis.setPose(-61, 0, 90);
+
+    // Score match load
+    setBeltState(BeltState::BELT_INTAKE);
+    pros::delay(1000);
+    setBeltState(BeltState::BELT_OFF);
+
+    // Move to first goal
+    chassis.moveToPoint(-45, 0, 10000); // Extra 3" for turning radius
+    chassis.turnToPoint(-48, -24, 10000, {.forwards = false}, false);
+    chassis.moveToPoint(-48, -24, 10000, {.forwards = false});
+
+    // Grab goal
+    chassis.waitUntil(40);
+    grabber_piston.set_value(HIGH);
+}
+
 void debugAuton()
 {
-
+    redLeft();
 }
 
 // Currently selected auton
