@@ -16,7 +16,6 @@ void setBeltState(BeltState state)
 void setColorSortState(ColorSortState state)
 {
   color_sort_state = state;
-  printf("Color Sort State: %d\n", state);
 }
 void setAntiLockState(AntiLockState state)
 {
@@ -142,9 +141,6 @@ void autoHold()
     {
       // Check the color
       pros::c::optical_rgb_s_t rgb = optical_sensor.get_rgb();
-
-      // Log rgb blue and red
-      printf("Red: %d, Blue: %d\n", rgb.red, rgb.blue);
 
       if ((getColorSortState() == ColorSortState::COLOR_SORT_BLUE && rgb.red > rgb.blue) ||
           (getColorSortState() == ColorSortState::COLOR_SORT_RED && rgb.blue > rgb.red) ||

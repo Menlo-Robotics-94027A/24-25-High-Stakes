@@ -14,9 +14,9 @@ struct Auton {
     AutonCategory category;
 };
 
-extern Auton selected_auton;
-extern Auton autons[];
-
+Auton* getSelectedAuton();
+Auton* getAutons(int* count);
+void setAuton(Auton* auton);
 void runAuton();
 
 #endif
